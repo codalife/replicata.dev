@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+
+const RELEASE_BASE = 'https://github.com/codalife/replicata-dist/releases/download/v0.1.0';
+const DOWNLOADS = [
+  { os: 'macOS (Apple Silicon)', file: 'replicata-darwin-arm64.tar.gz', detect: 'mac-arm' },
+  { os: 'macOS (Intel)', file: 'replicata-darwin-x64.tar.gz', detect: 'mac-intel' },
+  { os: 'Linux (x64)', file: 'replicata-linux-x64.tar.gz', detect: 'linux' },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Download — Replicata</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%99%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body class="bg-zinc-950 text-zinc-200 font-sans antialiased">
+    <header class="border-b border-zinc-900">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-xl font-semibold text-white">replicata</a>
+      </div>
+    </header>
+
+    <section class="max-w-xl mx-auto px-6 py-20">
+      <h1 class="text-2xl font-semibold text-white text-center">Download</h1>
+      <p class="mt-4 text-center text-zinc-400 text-sm">Pick your platform. Untar and run — Node is bundled, nothing to install.</p>
+      <div class="mt-8 grid gap-3">
+        {DOWNLOADS.map((d) => (
+          <a
+            href={`${RELEASE_BASE}/${d.file}`}
+            data-detect={d.detect}
+            data-track="download_clicked"
+            class="download-btn flex items-center justify-between px-5 py-3 rounded-lg border border-zinc-800 bg-zinc-900/50 hover:border-emerald-700 hover:bg-zinc-900 transition text-sm"
+          >
+            <span class="text-zinc-200">{d.os}</span>
+            <span class="text-zinc-500 text-xs">.tar.gz</span>
+          </a>
+        ))}
+      </div>
+      <div class="mt-6 text-center text-xs text-zinc-600 space-y-2">
+        <p><code class="text-emerald-300">tar xzf replicata-*.tar.gz && cd replicata-* && ./replicata chrome</code></p>
+        <p>Then open the Replicata UI tab and activate your license key.</p>
+      </div>
+    </section>
+
+    <script>
+      const ua = navigator.userAgent.toLowerCase();
+      const platform = (navigator as any).userAgentData?.platform?.toLowerCase() ?? '';
+      let detect = 'linux';
+      if (platform.includes('mac') || ua.includes('mac')) {
+        detect = ua.includes('arm') || (platform.includes('mac') && !ua.includes('intel')) ? 'mac-arm' : 'mac-intel';
+      } else if (ua.includes('win')) {
+        detect = 'windows';
+      }
+      const btn = document.querySelector(`[data-detect="${detect}"]`);
+      if (btn) {
+        btn.classList.add('border-emerald-600', 'bg-emerald-950/30');
+        const label = btn.querySelector('span:last-child');
+        if (label) label.textContent = 'recommended';
+      }
+    </script>
+  </body>
+</html>

@@ -7,9 +7,16 @@ const LAUNCHED = false;
 const CHECKOUT_URL = 'https://sandbox.polar.sh/checkout/REPLACE_ME';
 const SUPPORT_EMAIL = 'hello@replicata.dev';
 const WAITLIST_HREF = `mailto:${SUPPORT_EMAIL}?subject=Notify%20me%20when%20Replicata%20launches&body=Sign%20me%20up%20for%20launch%20notification.%0A%0A(Reply%20with%20anything%20else%20you%20want%20us%20to%20know%20%E2%80%94%20what%20you%27d%20use%20it%20for%2C%20what%20streaming%20apps%20you%20build%20against%2C%20etc.)`;
-const PRIMARY_HREF = LAUNCHED ? CHECKOUT_URL : WAITLIST_HREF;
-const PRIMARY_LABEL = LAUNCHED ? 'Start 7-day trial' : 'Get notified at launch';
-const PRIMARY_NAV_LABEL = LAUNCHED ? 'Start trial →' : 'Get notified →';
+const PRIMARY_HREF = LAUNCHED ? '#download' : WAITLIST_HREF;
+const PRIMARY_LABEL = LAUNCHED ? 'Download' : 'Get notified at launch';
+const PRIMARY_NAV_LABEL = LAUNCHED ? 'Download →' : 'Get notified →';
+
+const RELEASE_BASE = 'https://github.com/codalife/replicata-dist/releases/download/v0.1.0';
+const DOWNLOADS = [
+  { os: 'macOS (Apple Silicon)', file: 'replicata-darwin-arm64.tar.gz', detect: 'mac-arm' },
+  { os: 'macOS (Intel)', file: 'replicata-darwin-x64.tar.gz', detect: 'mac-intel' },
+  { os: 'Linux (x64)', file: 'replicata-linux-x64.tar.gz', detect: 'linux' },
+];
 ---
 
 <html lang="en">
@@ -112,6 +119,29 @@ const PRIMARY_NAV_LABEL = LAUNCHED ? 'Start trial →' : 'Get notified →';
       </div>
     </section>
 
+    {LAUNCHED && (
+      <section id="download" class="max-w-xl mx-auto px-6 py-20">
+        <h2 class="text-2xl font-semibold text-white text-center">Download</h2>
+        <p class="mt-4 text-center text-zinc-400 text-sm">Pick your platform. Untar and run — Node is bundled, nothing to install.</p>
+        <div class="mt-8 grid gap-3" id="download-grid">
+          {DOWNLOADS.map((d) => (
+            <a
+              href={`${RELEASE_BASE}/${d.file}`}
+              data-detect={d.detect}
+              data-track="download_clicked"
+              class="download-btn flex items-center justify-between px-5 py-3 rounded-lg border border-zinc-800 bg-zinc-900/50 hover:border-emerald-700 hover:bg-zinc-900 transition text-sm"
+            >
+              <span class="text-zinc-200">{d.os}</span>
+              <span class="text-zinc-500 text-xs">.tar.gz</span>
+            </a>
+          ))}
+        </div>
+        <p class="mt-4 text-center text-xs text-zinc-600">
+          Then: <code class="text-emerald-300">tar xzf replicata-*.tar.gz && cd replicata-* && ./replicata chrome</code>
+        </p>
+      </section>
+    )}
+
     <section id="pricing" class="max-w-xl mx-auto px-6 py-20">
       <h2 class="text-2xl font-semibold text-white text-center">Pricing</h2>
       <div class="mt-10 rounded-xl border border-zinc-800 bg-zinc-900/50 p-8">
@@ -195,7 +225,7 @@ const PRIMARY_NAV_LABEL = LAUNCHED ? 'Start trial →' : 'Get notified →';
       <div>
         <h3 class="font-semibold text-white">Mac / Windows / Linux?</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          All three. macOS (arm64 + x64), Windows x64, Linux x64.
+          macOS (Apple Silicon + Intel) and Linux x64 today. Windows coming soon.
         </p>
       </div>
 
@@ -224,6 +254,26 @@ const PRIMARY_NAV_LABEL = LAUNCHED ? 'Start trial →' : 'Get notified →';
         </div>
       </div>
     </footer>
+
+    <script>
+      // Highlight the download button matching the user's OS
+      (function () {
+        const ua = navigator.userAgent.toLowerCase();
+        const platform = (navigator as any).userAgentData?.platform?.toLowerCase() ?? '';
+        let detect = 'linux';
+        if (platform.includes('mac') || ua.includes('mac')) {
+          detect = ua.includes('arm') || (platform.includes('mac') && !ua.includes('intel')) ? 'mac-arm' : 'mac-intel';
+        } else if (ua.includes('win')) {
+          detect = 'windows';
+        }
+        const btn = document.querySelector(`[data-detect="${detect}"]`);
+        if (btn) {
+          btn.classList.add('border-emerald-600', 'bg-emerald-950/30');
+          const label = btn.querySelector('span:last-child');
+          if (label) label.textContent = 'recommended';
+        }
+      })();
+    </script>
 
     <script>
       import { PostHog } from 'posthog-js-lite';
