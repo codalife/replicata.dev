@@ -1,14 +1,15 @@
 ---
 import '../styles/global.css';
 
-// Replace with the real Polar checkout link once generated in the dashboard.
-// Product: Replicata recurring ($12/mo, 7-day trial, no card).
+// Pre-launch: CTAs point at a mailto for the waitlist. Flip back to the real
+// Polar checkout link once we're ready to sell binaries.
+const LAUNCHED = false;
 const CHECKOUT_URL = 'https://sandbox.polar.sh/checkout/REPLACE_ME';
 const SUPPORT_EMAIL = 'hello@replicata.dev';
-
-// Client-side posthog — public key, safe to embed.
-const POSTHOG_KEY = import.meta.env.PUBLIC_POSTHOG_KEY ?? '';
-const POSTHOG_HOST = import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com';
+const WAITLIST_HREF = `mailto:${SUPPORT_EMAIL}?subject=Notify%20me%20when%20Replicata%20launches&body=Sign%20me%20up%20for%20launch%20notification.%0A%0A(Reply%20with%20anything%20else%20you%20want%20us%20to%20know%20%E2%80%94%20what%20you%27d%20use%20it%20for%2C%20what%20streaming%20apps%20you%20build%20against%2C%20etc.)`;
+const PRIMARY_HREF = LAUNCHED ? CHECKOUT_URL : WAITLIST_HREF;
+const PRIMARY_LABEL = LAUNCHED ? 'Start 7-day trial' : 'Get notified at launch';
+const PRIMARY_NAV_LABEL = LAUNCHED ? 'Start trial →' : 'Get notified →';
 ---
 
 <html lang="en">
@@ -23,6 +24,11 @@ const POSTHOG_HOST = import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://us.i.postho
     <meta property="og:type" content="website" />
   </head>
   <body class="bg-zinc-950 text-zinc-200 font-sans antialiased">
+    {!LAUNCHED && (
+      <div class="bg-emerald-950/40 border-b border-emerald-900/50 text-center text-sm py-2 px-4 text-emerald-200">
+        Replicata is launching soon. <a href={WAITLIST_HREF} data-track="waitlist_banner_clicked" class="underline hover:text-emerald-100">Get notified →</a>
+      </div>
+    )}
     <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-900">
       <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="/" class="text-xl font-semibold text-white">replicata</a>
@@ -30,7 +36,7 @@ const POSTHOG_HOST = import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://us.i.postho
           <a href="#how" class="hover:text-white">How it works</a>
           <a href="#pricing" class="hover:text-white">Pricing</a>
           <a href="#faq" class="hover:text-white">FAQ</a>
-          <a href={CHECKOUT_URL} data-track="cta_clicked_nav" class="text-emerald-400 hover:text-emerald-300">Start trial →</a>
+          <a href={PRIMARY_HREF} data-track="cta_clicked_nav" class="text-emerald-400 hover:text-emerald-300">{PRIMARY_NAV_LABEL}</a>
         </nav>
       </div>
     </header>
@@ -44,12 +50,12 @@ const POSTHOG_HOST = import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://us.i.postho
         Replicata taps real production bytes in your own browser — LLM chat apps, real-time dashboards, collaborative editors — and replays them into your local renderer. Real chunk timing. Real SSE framing. Real edge cases. No mocks, no API keys, no cost.
       </p>
       <div class="mt-10 flex items-center justify-center gap-3 flex-wrap">
-        <a href={CHECKOUT_URL} data-track="cta_clicked_hero" class="inline-flex items-center px-6 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
-          Start 7-day trial
+        <a href={PRIMARY_HREF} data-track="cta_clicked_hero" class="inline-flex items-center px-6 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
+          {PRIMARY_LABEL}
         </a>
-        <span class="text-sm text-zinc-500">no card required</span>
+        <span class="text-sm text-zinc-500">{LAUNCHED ? 'no card required' : 'launching soon · ' + SUPPORT_EMAIL}</span>
       </div>
-      <p class="mt-4 text-xs text-zinc-600">$12/month after trial · cancel anytime</p>
+      <p class="mt-4 text-xs text-zinc-600">$12/month · 7-day trial · cancel anytime</p>
     </section>
 
     <section id="how" class="max-w-5xl mx-auto px-6 py-16">
@@ -122,8 +128,8 @@ const POSTHOG_HOST = import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://us.i.postho
           <li>✓ Replicata packs when they land (v1.1)</li>
           <li>✓ Email support</li>
         </ul>
-        <a href={CHECKOUT_URL} data-track="cta_clicked_pricing" class="mt-8 w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
-          Start trial
+        <a href={PRIMARY_HREF} data-track="cta_clicked_pricing" class="mt-8 w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
+          {LAUNCHED ? 'Start trial' : 'Get notified at launch'}
         </a>
       </div>
     </section>
