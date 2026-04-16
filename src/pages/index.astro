@@ -1,0 +1,191 @@
+---
+import '../styles/global.css';
+
+// Replace with the real Polar checkout link once generated in the dashboard.
+// Product: Replicata recurring ($12/mo, 7-day trial, no card).
+const CHECKOUT_URL = 'https://sandbox.polar.sh/checkout/REPLACE_ME';
+const SUPPORT_EMAIL = 'hello@replicata.dev';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Build frontend renderers against real production streaming responses. Practice your UI against the same bytes you'd see in prod — no mocks, no keys, no cost." />
+    <title>Replicata — practice your UI against real production streams</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%99%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+    <meta property="og:title" content="Replicata" />
+    <meta property="og:description" content="Practice your UI against real production streams." />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="bg-zinc-950 text-zinc-200 font-sans antialiased">
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-900">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-xl font-semibold text-white">replicata</a>
+        <nav class="hidden sm:flex gap-6 text-sm text-zinc-400 items-center">
+          <a href="#how" class="hover:text-white">How it works</a>
+          <a href="#pricing" class="hover:text-white">Pricing</a>
+          <a href="#faq" class="hover:text-white">FAQ</a>
+          <a href={CHECKOUT_URL} class="text-emerald-400 hover:text-emerald-300">Start trial →</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="max-w-3xl mx-auto px-6 py-24 text-center">
+      <h1 class="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight">
+        Practice your UI against<br />
+        <span class="text-emerald-400">real production streams.</span>
+      </h1>
+      <p class="mt-6 text-lg text-zinc-400 leading-relaxed">
+        Replicata taps real production bytes in your own browser — LLM chat apps, real-time dashboards, collaborative editors — and replays them into your local renderer. Real chunk timing. Real SSE framing. Real edge cases. No mocks, no API keys, no cost.
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-3 flex-wrap">
+        <a href={CHECKOUT_URL} class="inline-flex items-center px-6 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
+          Start 7-day trial
+        </a>
+        <span class="text-sm text-zinc-500">no card required</span>
+      </div>
+      <p class="mt-4 text-xs text-zinc-600">$12/month after trial · cancel anytime</p>
+    </section>
+
+    <section id="how" class="max-w-5xl mx-auto px-6 py-16">
+      <h2 class="text-2xl font-semibold text-white text-center">How it works</h2>
+      <div class="mt-12 grid gap-10 md:grid-cols-3">
+        <div>
+          <div class="text-5xl text-emerald-400/80 font-mono">1</div>
+          <h3 class="mt-3 text-lg font-semibold text-white">Connect a real app</h3>
+          <p class="mt-2 text-zinc-400 text-sm leading-relaxed">
+            Open any streaming web app you already use in Chrome. Replicata observes the bytes in your own browser — passive tap, no automation, nothing sent anywhere.
+          </p>
+        </div>
+        <div>
+          <div class="text-5xl text-emerald-400/80 font-mono">2</div>
+          <h3 class="mt-3 text-lg font-semibold text-white">Connect your renderer</h3>
+          <p class="mt-2 text-zinc-400 text-sm leading-relaxed">
+            Point Replicata at your localhost app. Real streams flow into your normal <code class="text-emerald-300">fetch("/api/chat")</code> call. Your code doesn't know the difference.
+          </p>
+        </div>
+        <div>
+          <div class="text-5xl text-emerald-400/80 font-mono">3</div>
+          <h3 class="mt-3 text-lg font-semibold text-white">Tag, mirror, practice</h3>
+          <p class="mt-2 text-zinc-400 text-sm leading-relaxed">
+            Pair interactive elements. Type in real, your code reacts. Inject latency, disconnects, malformed chunks. Ship a renderer that handles production for real.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-6 py-16 space-y-10">
+      <div>
+        <h3 class="text-lg font-semibold text-white">Real bytes &gt; mocked fixtures</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Mocks lie. They give you clean, uniform chunks on a predictable cadence. Real SSE streams are bursty, occasionally malformed, sometimes disconnect mid-message. Replicata makes the real ones your dev loop.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-white">ToS-clean by design</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Replicata never automates the real app, never fires events into it, never scrapes or redistributes data. It's a DevTools-grade passive tap on your own browser session — you drive, it observes.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-white">Replicata packs <span class="text-xs text-emerald-400 font-normal align-middle">— coming v1.1</span></h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Shared, curated tag + endpoint libraries for the streaming apps you care about — updated as the apps change. Stop reverse-engineering selectors every month. Your subscription keeps you current.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-white">Injected failure modes</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Latency multipliers, mid-stream disconnects, dropped chunks, rate-limit responses, malformed JSON. Deterministic, replayable, offline. Your error UI finally gets tested.
+        </p>
+      </div>
+    </section>
+
+    <section id="pricing" class="max-w-xl mx-auto px-6 py-20">
+      <h2 class="text-2xl font-semibold text-white text-center">Pricing</h2>
+      <div class="mt-10 rounded-xl border border-zinc-800 bg-zinc-900/50 p-8">
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl font-bold text-white">$12</span>
+          <span class="text-zinc-400">/ month</span>
+        </div>
+        <p class="mt-2 text-sm text-zinc-500">7-day free trial, no card required</p>
+        <ul class="mt-6 space-y-2 text-sm text-zinc-300">
+          <li>✓ Unlimited tags and endpoints</li>
+          <li>✓ All scenarios (latency, disconnect, drops, rate-limit, malformed)</li>
+          <li>✓ State timelines and signature diffing</li>
+          <li>✓ Up to 3 machines per license</li>
+          <li>✓ Replicata packs when they land (v1.1)</li>
+          <li>✓ Email support</li>
+        </ul>
+        <a href={CHECKOUT_URL} class="mt-8 w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
+          Start trial
+        </a>
+      </div>
+    </section>
+
+    <section id="faq" class="max-w-3xl mx-auto px-6 py-16 space-y-8">
+      <h2 class="text-2xl font-semibold text-white text-center">FAQ</h2>
+
+      <div>
+        <h3 class="font-semibold text-white">Is this a scraper? Does it violate ToS?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          No. Replicata is a passive tap — it observes bytes in a browser <em>you</em> drive, just like the DevTools Network panel. No automation, no requests made on your behalf, no data ever leaves your machine. Treat it like a local debugger.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">Do I need API keys?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          No. Your regular logged-in browser session is the source. Replicata watches what's already flowing and replays it into your renderer. Zero cost, zero keys.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">What frameworks does it work with?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Any. Replicata hands your app a normal <code class="text-emerald-300">Response</code> from a normal <code class="text-emerald-300">fetch()</code>. React, Svelte, Vue, vanilla — all the same.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">How many machines per license?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Three. Laptop + desktop + work machine. Deactivate one to move to a new one.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">Mac / Windows / Linux?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          All three. macOS (arm64 + x64), Windows x64, Linux x64.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">Cancel anytime?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Yes. One click in the Polar customer portal. Your license stays valid until the end of the paid period.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">Refunds?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          The 7-day trial is there to prevent unhappy paid customers. Email {SUPPORT_EMAIL} if the trial didn't cover your case — we'll sort it out.
+        </p>
+      </div>
+    </section>
+
+    <footer class="max-w-5xl mx-auto px-6 py-10 border-t border-zinc-900 mt-10 text-sm text-zinc-500">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>© 2026 Replicata.</div>
+        <div class="flex gap-6">
+          <a href={`mailto:${SUPPORT_EMAIL}`} class="hover:text-zinc-300">Support</a>
+          <a href="/terms" class="hover:text-zinc-300">Terms</a>
+          <a href="/privacy" class="hover:text-zinc-300">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
