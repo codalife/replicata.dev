@@ -142,6 +142,33 @@ const SUPPORT_EMAIL = 'hello@replicata.dev';
       </div>
 
       <div>
+        <h3 class="font-semibold text-white">First-time setup — what do I actually do?</h3>
+        <ol class="mt-2 text-zinc-400 leading-relaxed space-y-2 list-decimal list-inside">
+          <li>Install Replicata and run it. It opens a dedicated Chrome window with remote debugging enabled (keeps a private profile in <code class="text-emerald-300">~/.kata/chrome-profile</code>).</li>
+          <li><strong class="text-zinc-300">In that Chrome window</strong>, navigate to the real app you want to practice against. Sign in if it requires it. Solve any CAPTCHA you see — you only do this once; the session persists across restarts.</li>
+          <li>Open your renderer on localhost in the same Chrome window (any port).</li>
+          <li>Open the Replicata UI tab. Pick the real-app tab + your localhost tab from the Connection panel. You're done.</li>
+        </ol>
+        <p class="mt-3 text-zinc-500 text-sm">
+          Why user-launched Chrome? Because automation-launched browsers trip Cloudflare and similar bot checks. Your own Chrome session is indistinguishable from normal browsing — Replicata just observes what's already flowing.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">I see a Cloudflare challenge or "Just a moment…" page. What do I do?</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Click through it in the Chrome window Replicata opened. It's the same challenge you'd see in any fresh browser session — Replicata doesn't bypass it. Once solved, the session persists; you won't see it again for a while.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">It says "login required" or redirects to a sign-in page.</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Sign in normally in the Chrome window Replicata opened. Session lives in the dedicated profile and survives restarts — you won't need to re-auth unless the site invalidates the session itself.
+        </p>
+      </div>
+
+      <div>
         <h3 class="font-semibold text-white">What frameworks does it work with?</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
           Any. Replicata hands your app a normal <code class="text-emerald-300">Response</code> from a normal <code class="text-emerald-300">fetch()</code>. React, Svelte, Vue, vanilla — all the same.
