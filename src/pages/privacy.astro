@@ -1,0 +1,157 @@
+---
+import '../styles/global.css';
+
+const SUPPORT_EMAIL = 'hello@replicata.dev';
+const UPDATED = 'April 16, 2026';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — Replicata</title>
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body class="bg-zinc-950 text-zinc-200 font-sans antialiased">
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-900">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-xl font-semibold text-white">replicata</a>
+        <nav class="hidden sm:flex gap-6 text-sm text-zinc-400 items-center">
+          <a href="/#how" class="hover:text-white">How it works</a>
+          <a href="/#pricing" class="hover:text-white">Pricing</a>
+          <a href="/#faq" class="hover:text-white">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-6 py-16 leading-relaxed">
+      <h1 class="text-3xl font-bold text-white">Privacy Policy</h1>
+      <p class="mt-2 text-sm text-zinc-500">Last updated: {UPDATED}</p>
+
+      <div class="mt-10 space-y-8 text-zinc-300">
+        <p>
+          Replicata is designed as a local-first developer tool. Most of what you do with the Software stays on your own machine. This policy explains what little data we do collect and how we handle it.
+        </p>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">1. What stays local</h2>
+          <p>
+            The following never leaves your machine and is never transmitted to us or any third party:
+          </p>
+          <ul class="mt-3 ml-6 list-disc space-y-2">
+            <li>Streaming bytes observed from third-party applications.</li>
+            <li>Element tags, discovery candidates, endpoint catalog entries.</li>
+            <li>Session cookies, logins, or auth tokens for any sites you observe.</li>
+            <li>Replicata's runtime state, scenario configurations, and feedback submissions (stored in your home directory).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">2. What we collect</h2>
+          <p>
+            The following limited data is collected in connection with your subscription:
+          </p>
+          <ul class="mt-3 ml-6 list-disc space-y-2">
+            <li><strong>Email address and billing data</strong> — collected by Polar.sh during checkout and subscription management. We receive access only to what Polar exposes to merchants (email, subscription status, country for tax purposes). We do not see or store full payment card details.</li>
+            <li><strong>License key metadata</strong> — when the Software validates your license with Polar's API, Polar records validation and activation events (timestamps, activation labels). These are visible to us and to you via the Polar customer portal.</li>
+            <li><strong>Machine fingerprint</strong> — a one-way hash of your hostname, username, and first network-interface MAC address, derived on your machine and sent to Polar only to bind a license to a machine (up to three activations per license). The hash cannot be reversed; we do not receive your hostname or MAC directly.</li>
+            <li><strong>Support correspondence</strong> — if you email us, we keep the email to respond to you.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">3. What we do NOT collect</h2>
+          <ul class="mt-3 ml-6 list-disc space-y-2">
+            <li>The Software does not ship any usage-analytics or telemetry SDK. It does not record what you click, which features you use, how long you use it, or what apps you observe.</li>
+            <li>The Software does not transmit error reports, stack traces, or crash logs to us.</li>
+            <li>We do not build advertising profiles, sell data, or share user information with marketing partners.</li>
+            <li>If we ever add opt-in telemetry, error reporting, or analytics SDKs, this policy will be updated <em>before</em> the feature ships.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">4. License-validation phone-home</h2>
+          <p>
+            On startup and every six hours, the Software contacts Polar's license-validation API to confirm your subscription is still active. Each request includes only:
+          </p>
+          <ul class="mt-3 ml-6 list-disc space-y-2">
+            <li>Your license key</li>
+            <li>Polar organization ID</li>
+            <li>The activation ID assigned to this machine (if already activated)</li>
+          </ul>
+          <p class="mt-3">
+            This is license enforcement, not analytics. No usage data is transmitted. Polar logs the request as it would any API call (timestamp, IP address, response) on their side — see their privacy policy for retention.
+          </p>
+          <p class="mt-3">
+            If your machine is offline for more than 7 days without a successful re-validation, the Software locks and prompts you to reconnect. No data is sent during offline grace.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">5. Website logs</h2>
+          <p>
+            The website <code class="text-emerald-300">replicata.dev</code> is hosted on Cloudflare Pages. Cloudflare records standard web-server logs (IP address, user-agent, requested path, response code, timestamps) for operational and security purposes. These logs are not used to build user profiles or for analytics beyond aggregate operational metrics. We do not set analytics cookies and do not currently embed any analytics script on the site.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">4. Third-party services</h2>
+          <ul class="mt-3 ml-6 list-disc space-y-2">
+            <li><strong>Polar.sh</strong> — payments, subscriptions, license keys, customer portal. See <a href="https://polar.sh/legal/privacy" class="text-emerald-400" target="_blank" rel="noopener">Polar's privacy policy</a>.</li>
+            <li><strong>Cloudflare</strong> — hosts this website and handles email forwarding for <code class="text-emerald-300">@replicata.dev</code> addresses.</li>
+            <li><strong>Resend or equivalent</strong> — transactional email provider for receipts, trial notifications, and license delivery. Identified in receipts.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">5. Your rights</h2>
+          <p>
+            You may request a copy or deletion of any personal data we hold about you. For billing and subscription data, use the Polar customer portal (link sent in your purchase confirmation). For anything else, email <a href={`mailto:${SUPPORT_EMAIL}`} class="text-emerald-400">{SUPPORT_EMAIL}</a>.
+          </p>
+          <p class="mt-3">
+            If you are in the EU, UK, or California: you have specific rights under GDPR / UK GDPR / CCPA including access, rectification, deletion, and portability. We honor these requests — email us and we'll coordinate with Polar as needed.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">6. Data retention</h2>
+          <p>
+            We retain billing and license data for as long as needed to administer your subscription plus any period required by law (tax, accounting). Support emails are kept indefinitely unless you ask us to delete them.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">7. Children</h2>
+          <p>
+            Replicata is a developer tool not directed at children under 13 (or 16 in applicable jurisdictions). We do not knowingly collect data from children.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">8. Changes</h2>
+          <p>
+            We may update this policy. Material changes will be noted here with a revised "Last updated" date. If changes are significant we will email active subscribers.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-white mt-8 mb-3">9. Contact</h2>
+          <p>
+            Privacy questions or data requests: <a href={`mailto:${SUPPORT_EMAIL}`} class="text-emerald-400">{SUPPORT_EMAIL}</a>.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer class="max-w-5xl mx-auto px-6 py-10 border-t border-zinc-900 mt-10 text-sm text-zinc-500">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>© 2026 Replicata.</div>
+        <div class="flex gap-6">
+          <a href={`mailto:${SUPPORT_EMAIL}`} class="hover:text-zinc-300">Support</a>
+          <a href="/terms" class="hover:text-zinc-300">Terms</a>
+          <a href="/privacy" class="hover:text-zinc-300">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
