@@ -1,68 +1,48 @@
 ---
 import '../styles/global.css';
 
-// Pre-launch: CTAs point at a mailto for the waitlist. Flip back to the real
-// Polar checkout link once we're ready to sell binaries.
-const LAUNCHED = false;
-const CHECKOUT_URL = 'https://buy.polar.sh/polar_cl_LBqNIGdMnToKiY2YyVOOmnC9FoO7q5ST8vXCx3ek8Rq';
+const REPO_URL = 'https://github.com/codalife/replicata';
 const SUPPORT_EMAIL = 'hello@replicata.dev';
-const WAITLIST_HREF = `mailto:${SUPPORT_EMAIL}?subject=Notify%20me%20when%20Replicata%20launches&body=Sign%20me%20up%20for%20launch%20notification.%0A%0A(Reply%20with%20anything%20else%20you%20want%20us%20to%20know%20%E2%80%94%20what%20you%27d%20use%20it%20for%2C%20what%20streaming%20apps%20you%20build%20against%2C%20etc.)`;
-const PRIMARY_HREF = LAUNCHED ? '#download' : WAITLIST_HREF;
-const PRIMARY_LABEL = LAUNCHED ? 'Download' : 'Get notified at launch';
-const PRIMARY_NAV_LABEL = LAUNCHED ? 'Download →' : 'Get notified →';
-
-const RELEASE_BASE = 'https://github.com/codalife/replicata-dist/releases/download/v0.1.0';
-const DOWNLOADS = [
-  { os: 'macOS (Apple Silicon)', file: 'replicata-darwin-arm64.tar.gz', detect: 'mac-arm' },
-  { os: 'macOS (Intel)', file: 'replicata-darwin-x64.tar.gz', detect: 'mac-intel' },
-  { os: 'Linux (x64)', file: 'replicata-linux-x64.tar.gz', detect: 'linux' },
-];
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Build frontend renderers against real production streaming responses. Practice your UI against the same bytes you'd see in prod — no mocks, no keys, no cost." />
-    <title>Replicata — practice your UI against real production streams</title>
+    <meta name="description" content="Observe real streaming web apps and replay their bytes into your local renderer. Open source. No mocks, no API keys, no cost." />
+    <title>Replicata — develop against real production streams</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%99%EF%B8%8F%3C/text%3E%3C/svg%3E" />
     <meta property="og:title" content="Replicata" />
-    <meta property="og:description" content="Practice your UI against real production streams." />
+    <meta property="og:description" content="Develop against real production streams. Open source." />
     <meta property="og:type" content="website" />
   </head>
   <body class="bg-zinc-950 text-zinc-200 font-sans antialiased">
-    {!LAUNCHED && (
-      <div class="bg-emerald-950/40 border-b border-emerald-900/50 text-center text-sm py-2 px-4 text-emerald-200">
-        Replicata is launching soon. <a href={WAITLIST_HREF} data-track="waitlist_banner_clicked" class="underline hover:text-emerald-100">Get notified →</a>
-      </div>
-    )}
     <header class="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-900">
       <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="/" class="text-xl font-semibold text-white">replicata</a>
         <nav class="hidden sm:flex gap-6 text-sm text-zinc-400 items-center">
           <a href="#how" class="hover:text-white">How it works</a>
-          <a href="#pricing" class="hover:text-white">Pricing</a>
+          <a href="#start" class="hover:text-white">Get started</a>
           <a href="#faq" class="hover:text-white">FAQ</a>
-          <a href={PRIMARY_HREF} data-track="cta_clicked_nav" class="text-emerald-400 hover:text-emerald-300">{PRIMARY_NAV_LABEL}</a>
+          <a href={REPO_URL} class="text-emerald-400 hover:text-emerald-300">GitHub →</a>
         </nav>
       </div>
     </header>
 
     <section class="max-w-3xl mx-auto px-6 py-24 text-center">
       <h1 class="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight">
-        Practice your UI against<br />
+        Develop against<br />
         <span class="text-emerald-400">real production streams.</span>
       </h1>
       <p class="mt-6 text-lg text-zinc-400 leading-relaxed">
-        Replicata taps real production bytes in your own browser — LLM chat apps, real-time dashboards, collaborative editors — and replays them into your local renderer. Real chunk timing. Real SSE framing. Real edge cases. No mocks, no API keys, no cost.
+        Replicata taps real streaming responses in your own browser — ChatGPT, Claude, any SSE app — and replays them into your local renderer with original chunk timing. Your code calls <code class="text-emerald-300">fetch()</code> and gets real bytes back. No mocks, no API keys, no cost.
       </p>
       <div class="mt-10 flex items-center justify-center gap-3 flex-wrap">
-        <a href={PRIMARY_HREF} data-track="cta_clicked_hero" class="inline-flex items-center px-6 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
-          {PRIMARY_LABEL}
+        <a href={REPO_URL} class="inline-flex items-center px-6 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
+          View on GitHub
         </a>
-        <span class="text-sm text-zinc-500">{LAUNCHED ? 'no card required' : 'launching soon · ' + SUPPORT_EMAIL}</span>
+        <span class="text-sm text-zinc-500">open source · MIT license</span>
       </div>
-      <p class="mt-4 text-xs text-zinc-600">$12/month · 7-day trial · cancel anytime</p>
     </section>
 
     <section id="how" class="max-w-5xl mx-auto px-6 py-16">
@@ -70,23 +50,23 @@ const DOWNLOADS = [
       <div class="mt-12 grid gap-10 md:grid-cols-3">
         <div>
           <div class="text-5xl text-emerald-400/80 font-mono">1</div>
-          <h3 class="mt-3 text-lg font-semibold text-white">Connect a real app</h3>
+          <h3 class="mt-3 text-lg font-semibold text-white">Start replicata + Chrome</h3>
           <p class="mt-2 text-zinc-400 text-sm leading-relaxed">
-            Open any streaming web app you already use in Chrome. Replicata observes the bytes in your own browser — passive tap, no automation, nothing sent anywhere.
+            <code class="text-emerald-300">npm run chrome</code> opens a dedicated Chrome with remote debugging. <code class="text-emerald-300">npm run dev</code> starts replicata. Navigate to any streaming app and log in.
           </p>
         </div>
         <div>
           <div class="text-5xl text-emerald-400/80 font-mono">2</div>
           <h3 class="mt-3 text-lg font-semibold text-white">Connect your renderer</h3>
           <p class="mt-2 text-zinc-400 text-sm leading-relaxed">
-            Point Replicata at your localhost app. Real streams flow into your normal <code class="text-emerald-300">fetch("/api/chat")</code> call. Your code doesn't know the difference.
+            Open your localhost app in the same Chrome. In the replicata UI, pick the real app tab and your renderer tab. Streams flow into your normal <code class="text-emerald-300">fetch("/api/chat")</code> call.
           </p>
         </div>
         <div>
           <div class="text-5xl text-emerald-400/80 font-mono">3</div>
-          <h3 class="mt-3 text-lg font-semibold text-white">Tag, mirror, practice</h3>
+          <h3 class="mt-3 text-lg font-semibold text-white">Develop against real data</h3>
           <p class="mt-2 text-zinc-400 text-sm leading-relaxed">
-            Pair interactive elements. Type in real, your code reacts. Inject latency, disconnects, malformed chunks. Ship a renderer that handles production for real.
+            Send a message in the real app. Your renderer gets the same bytes with original timing. Tag elements, forward events, inject failures. Export captured chunks for your test suite.
           </p>
         </div>
       </div>
@@ -94,73 +74,47 @@ const DOWNLOADS = [
 
     <section class="max-w-3xl mx-auto px-6 py-16 space-y-10">
       <div>
-        <h3 class="text-lg font-semibold text-white">Real bytes &gt; mocked fixtures</h3>
+        <h3 class="text-lg font-semibold text-white">Real bytes, not mocks</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          Mocks lie. They give you clean, uniform chunks on a predictable cadence. Real SSE streams are bursty, occasionally malformed, sometimes disconnect mid-message. Replicata makes the real ones your dev loop.
+          Mocks give you clean, uniform chunks on a predictable cadence. Real SSE streams are bursty, occasionally malformed, sometimes disconnect mid-message. Replicata makes the real ones your dev loop.
         </p>
       </div>
       <div>
-        <h3 class="text-lg font-semibold text-white">ToS-clean by design</h3>
+        <h3 class="text-lg font-semibold text-white">Failure injection</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Latency multipliers, mid-stream disconnects, dropped chunks, rate-limit responses, malformed JSON. Deterministic scenarios applied to real captured data. Your error UI finally gets tested.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-white">Export chunks for tests</h3>
+        <p class="mt-2 text-zinc-400 leading-relaxed">
+          Capture a streaming response, export the chunks with original timing. Paste into MSW, Playwright route mocks, or any test framework. Real production data in your test suite — not hand-written fixtures.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-white">Passive by design</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
           Replicata never automates the real app, never fires events into it, never scrapes or redistributes data. It's a DevTools-grade passive tap on your own browser session — you drive, it observes.
         </p>
       </div>
-      <div>
-        <h3 class="text-lg font-semibold text-white">Replicata packs <span class="text-xs text-emerald-400 font-normal align-middle">— coming v1.1</span></h3>
-        <p class="mt-2 text-zinc-400 leading-relaxed">
-          Shared, curated tag + endpoint libraries for the streaming apps you care about — updated as the apps change. Stop reverse-engineering selectors every month. Your subscription keeps you current.
-        </p>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-white">Injected failure modes</h3>
-        <p class="mt-2 text-zinc-400 leading-relaxed">
-          Latency multipliers, mid-stream disconnects, dropped chunks, rate-limit responses, malformed JSON. Deterministic, replayable, offline. Your error UI finally gets tested.
-        </p>
-      </div>
     </section>
 
-    {LAUNCHED && (
-      <section id="download" class="max-w-xl mx-auto px-6 py-20">
-        <h2 class="text-2xl font-semibold text-white text-center">Download</h2>
-        <p class="mt-4 text-center text-zinc-400 text-sm">Pick your platform. Untar and run — Node is bundled, nothing to install.</p>
-        <div class="mt-8 grid gap-3" id="download-grid">
-          {DOWNLOADS.map((d) => (
-            <a
-              href={`${RELEASE_BASE}/${d.file}`}
-              data-detect={d.detect}
-              data-track="download_clicked"
-              class="download-btn flex items-center justify-between px-5 py-3 rounded-lg border border-zinc-800 bg-zinc-900/50 hover:border-emerald-700 hover:bg-zinc-900 transition text-sm"
-            >
-              <span class="text-zinc-200">{d.os}</span>
-              <span class="text-zinc-500 text-xs">.tar.gz</span>
-            </a>
-          ))}
-        </div>
-        <p class="mt-4 text-center text-xs text-zinc-600">
-          Then: <code class="text-emerald-300">tar xzf replicata-*.tar.gz && cd replicata-* && ./replicata chrome</code>
-        </p>
-      </section>
-    )}
+    <section id="start" class="max-w-xl mx-auto px-6 py-20">
+      <h2 class="text-2xl font-semibold text-white text-center">Get started</h2>
+      <div class="mt-8 rounded-xl border border-zinc-800 bg-zinc-900/50 p-8">
+        <pre class="text-sm text-zinc-300 leading-relaxed overflow-x-auto"><code><span class="text-zinc-500"># clone + install</span>
+git clone {REPO_URL}.git
+cd replicata && npm install
 
-    <section id="pricing" class="max-w-xl mx-auto px-6 py-20">
-      <h2 class="text-2xl font-semibold text-white text-center">Pricing</h2>
-      <div class="mt-10 rounded-xl border border-zinc-800 bg-zinc-900/50 p-8">
-        <div class="flex items-baseline gap-2">
-          <span class="text-4xl font-bold text-white">$12</span>
-          <span class="text-zinc-400">/ month</span>
-        </div>
-        <p class="mt-2 text-sm text-zinc-500">7-day free trial, no card required</p>
-        <ul class="mt-6 space-y-2 text-sm text-zinc-300">
-          <li>✓ Unlimited tags and endpoints</li>
-          <li>✓ All scenarios (latency, disconnect, drops, rate-limit, malformed)</li>
-          <li>✓ State timelines and signature diffing</li>
-          <li>✓ Up to 3 machines per license</li>
-          <li>✓ Replicata packs when they land (v1.1)</li>
-          <li>✓ Email support</li>
-        </ul>
-        <a href={PRIMARY_HREF} data-track="cta_clicked_pricing" class="mt-8 w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-emerald-500 text-zinc-950 font-semibold hover:bg-emerald-400 transition">
-          {LAUNCHED ? 'Start trial' : 'Get notified at launch'}
-        </a>
+<span class="text-zinc-500"># terminal 1: launch Chrome</span>
+npm run chrome
+
+<span class="text-zinc-500"># terminal 2: start replicata</span>
+npm run dev
+
+<span class="text-zinc-500"># terminal 3: start your app (or the example)</span>
+npm run example</code></pre>
+        <p class="mt-6 text-sm text-zinc-500">Open the replicata UI tab in Chrome, pick your tabs, send a message in the real app.</p>
       </div>
     </section>
 
@@ -170,128 +124,54 @@ const DOWNLOADS = [
       <div>
         <h3 class="font-semibold text-white">Is this a scraper? Does it violate ToS?</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          No. Replicata is a passive tap — it observes bytes in a browser <em>you</em> drive, just like the DevTools Network panel. No automation, no requests made on your behalf, no data ever leaves your machine. Treat it like a local debugger.
+          No. Replicata is a passive tap — it observes bytes in a browser <em>you</em> drive, like the DevTools Network panel. No automation, no requests on your behalf, no data leaves your machine.
         </p>
       </div>
 
       <div>
         <h3 class="font-semibold text-white">Do I need API keys?</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          No. Your regular logged-in browser session is the source. Replicata watches what's already flowing and replays it into your renderer. Zero cost, zero keys.
+          No. Your regular logged-in browser session is the source. Zero cost, zero keys.
         </p>
       </div>
 
       <div>
-        <h3 class="font-semibold text-white">First-time setup — what do I actually do?</h3>
-        <ol class="mt-2 text-zinc-400 leading-relaxed space-y-2 list-decimal list-inside">
-          <li>Install Replicata and run it. It opens a dedicated Chrome window with remote debugging enabled (keeps a private profile in <code class="text-emerald-300">~/.replicata/chrome-profile</code>).</li>
-          <li><strong class="text-zinc-300">In that Chrome window</strong>, navigate to the real app you want to practice against. Sign in if it requires it. Solve any CAPTCHA you see — you only do this once; the session persists across restarts.</li>
-          <li>Open your renderer on localhost in the same Chrome window (any port).</li>
-          <li>Open the Replicata UI tab. Pick the real-app tab + your localhost tab from the Connection panel. You're done.</li>
-        </ol>
-        <p class="mt-3 text-zinc-500 text-sm">
-          Why user-launched Chrome? Because automation-launched browsers trip Cloudflare and similar bot checks. Your own Chrome session is indistinguishable from normal browsing — Replicata just observes what's already flowing.
-        </p>
-      </div>
-
-      <div>
-        <h3 class="font-semibold text-white">I see a Cloudflare challenge or "Just a moment…" page. What do I do?</h3>
+        <h3 class="font-semibold text-white">I see a Cloudflare challenge page.</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          Click through it in the Chrome window Replicata opened. It's the same challenge you'd see in any fresh browser session — Replicata doesn't bypass it. Once solved, the session persists; you won't see it again for a while.
-        </p>
-      </div>
-
-      <div>
-        <h3 class="font-semibold text-white">It says "login required" or redirects to a sign-in page.</h3>
-        <p class="mt-2 text-zinc-400 leading-relaxed">
-          Sign in normally in the Chrome window Replicata opened. Session lives in the dedicated profile and survives restarts — you won't need to re-auth unless the site invalidates the session itself.
+          Click through it in the Chrome window. It's the same challenge you'd see in any fresh browser. Once solved, the session persists across restarts.
         </p>
       </div>
 
       <div>
         <h3 class="font-semibold text-white">What frameworks does it work with?</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          Any. Replicata hands your app a normal <code class="text-emerald-300">Response</code> from a normal <code class="text-emerald-300">fetch()</code>. React, Svelte, Vue, vanilla — all the same.
+          Any. Your app calls <code class="text-emerald-300">fetch()</code> and gets a normal <code class="text-emerald-300">Response</code> back. React, Svelte, Vue, vanilla — all the same.
         </p>
       </div>
 
       <div>
-        <h3 class="font-semibold text-white">How many machines per license?</h3>
+        <h3 class="font-semibold text-white">What apps can I observe?</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          Three. Laptop + desktop + work machine. Deactivate one to move to a new one.
+          Any web app that streams data — LLM chat apps, real-time dashboards, collaborative editors. Tested against ChatGPT and Claude.
         </p>
       </div>
 
       <div>
         <h3 class="font-semibold text-white">Mac / Windows / Linux?</h3>
         <p class="mt-2 text-zinc-400 leading-relaxed">
-          macOS (Apple Silicon + Intel) and Linux x64 today. Windows coming soon.
-        </p>
-      </div>
-
-      <div>
-        <h3 class="font-semibold text-white">Cancel anytime?</h3>
-        <p class="mt-2 text-zinc-400 leading-relaxed">
-          Yes. One click in the Polar customer portal. Your license stays valid until the end of the paid period.
-        </p>
-      </div>
-
-      <div>
-        <h3 class="font-semibold text-white">Refunds?</h3>
-        <p class="mt-2 text-zinc-400 leading-relaxed">
-          The 7-day trial is there to prevent unhappy paid customers. Email {SUPPORT_EMAIL} if the trial didn't cover your case — we'll sort it out.
+          Anywhere Node.js and Chrome run. Tested on macOS and Linux.
         </p>
       </div>
     </section>
 
     <footer class="max-w-5xl mx-auto px-6 py-10 border-t border-zinc-900 mt-10 text-sm text-zinc-500">
       <div class="flex flex-wrap items-center justify-between gap-4">
-        <div>© 2026 Replicata.</div>
+        <div>© 2026 Replicata. Open source under MIT.</div>
         <div class="flex gap-6">
-          <a href={`mailto:${SUPPORT_EMAIL}`} class="hover:text-zinc-300">Support</a>
-          <a href="/terms" class="hover:text-zinc-300">Terms</a>
-          <a href="/privacy" class="hover:text-zinc-300">Privacy</a>
+          <a href={REPO_URL} class="hover:text-zinc-300">GitHub</a>
+          <a href={`mailto:${SUPPORT_EMAIL}`} class="hover:text-zinc-300">Contact</a>
         </div>
       </div>
     </footer>
-
-    <script>
-      // Highlight the download button matching the user's OS
-      (function () {
-        const ua = navigator.userAgent.toLowerCase();
-        const platform = (navigator as any).userAgentData?.platform?.toLowerCase() ?? '';
-        let detect = 'linux';
-        if (platform.includes('mac') || ua.includes('mac')) {
-          detect = ua.includes('arm') || (platform.includes('mac') && !ua.includes('intel')) ? 'mac-arm' : 'mac-intel';
-        } else if (ua.includes('win')) {
-          detect = 'windows';
-        }
-        const btn = document.querySelector(`[data-detect="${detect}"]`);
-        if (btn) {
-          btn.classList.add('border-emerald-600', 'bg-emerald-950/30');
-          const label = btn.querySelector('span:last-child');
-          if (label) label.textContent = 'recommended';
-        }
-      })();
-    </script>
-
-    <script>
-      import { PostHog } from 'posthog-js-lite';
-
-      const KEY = import.meta.env.PUBLIC_POSTHOG_KEY;
-      const HOST = import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com';
-
-      if (KEY) {
-        const ph = new PostHog(KEY, { host: HOST, persistence: 'localStorage' });
-        // Manual pageview — lite doesn't auto-fire.
-        ph.capture('$pageview', { source: 'landing', path: location.pathname });
-        const track = (event: string, props?: Record<string, unknown>) => {
-          try { ph.capture(event, { ...props, source: 'landing' }); } catch {}
-        };
-        document.querySelectorAll<HTMLAnchorElement>('a[data-track]').forEach((a) => {
-          a.addEventListener('click', () => track(a.dataset.track ?? 'link_clicked', { href: a.href, text: a.textContent?.trim() }));
-        });
-      }
-    </script>
   </body>
 </html>
