@@ -45,6 +45,90 @@ const SUPPORT_EMAIL = 'hello@replicata.dev';
       </div>
     </section>
 
+    <section class="max-w-3xl mx-auto px-6 py-16">
+      <h2 class="text-2xl font-semibold text-white text-center">The problem</h2>
+      <div class="mt-8 text-zinc-400 leading-relaxed space-y-4">
+        <p>You're building a streaming UI. Maybe a chat interface, maybe a real-time dashboard. You need to handle SSE, chunked responses, partial JSON, reconnection, error states.</p>
+        <p>So you try the usual approaches:</p>
+        <ul class="space-y-3 text-sm">
+          <li><strong class="text-zinc-300">Mock the API.</strong> Write a fake SSE endpoint that sends clean, uniform chunks every 50ms. Ship it. Prod streams are bursty, split across packet boundaries, occasionally malformed. Your UI jitters.</li>
+          <li><strong class="text-zinc-300">Use the real API with a key.</strong> Pay per request. Hit rate limits. Wait for responses. Burn through credits debugging a CSS issue.</li>
+          <li><strong class="text-zinc-300">Take a course.</strong> Follow a tutorial that was written for last year's API format. The payload shape changed three months ago.</li>
+          <li><strong class="text-zinc-300">Copy-paste responses into fixtures.</strong> Open DevTools, copy a response, save it as JSON. No timing info. One snapshot that goes stale immediately.</li>
+          <li><strong class="text-zinc-300">Ask an LLM to generate test data.</strong> It doesn't know the real SSE framing, the real chunk boundaries, the real error shapes. You learn nothing about production behavior.</li>
+        </ul>
+        <p>Every approach is either expensive, stale, or fake. None of them give you what you actually need: <strong class="text-white">the real bytes, with real timing, flowing into your code while you develop.</strong></p>
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-6 py-12">
+      <h2 class="text-2xl font-semibold text-white text-center mb-8">How does replicata compare?</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="text-left border-b border-zinc-800">
+              <th class="py-3 pr-4 text-zinc-400 font-medium"></th>
+              <th class="py-3 px-3 text-zinc-400 font-medium">Mocks</th>
+              <th class="py-3 px-3 text-zinc-400 font-medium">Record &amp; replay</th>
+              <th class="py-3 px-3 text-zinc-400 font-medium">Real API + key</th>
+              <th class="py-3 px-3 text-zinc-400 font-medium">Courses</th>
+              <th class="py-3 px-3 text-emerald-400 font-semibold">Replicata</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-400">
+            <tr class="border-b border-zinc-900">
+              <td class="py-2.5 pr-4 text-zinc-300">Fidelity</td>
+              <td class="py-2.5 px-3">Low</td>
+              <td class="py-2.5 px-3">Medium</td>
+              <td class="py-2.5 px-3">High</td>
+              <td class="py-2.5 px-3">Low</td>
+              <td class="py-2.5 px-3 text-emerald-300">Real prod bytes</td>
+            </tr>
+            <tr class="border-b border-zinc-900">
+              <td class="py-2.5 pr-4 text-zinc-300">Chunk timing</td>
+              <td class="py-2.5 px-3">Fake</td>
+              <td class="py-2.5 px-3">Snapshot</td>
+              <td class="py-2.5 px-3">Real</td>
+              <td class="py-2.5 px-3">N/A</td>
+              <td class="py-2.5 px-3 text-emerald-300">Real</td>
+            </tr>
+            <tr class="border-b border-zinc-900">
+              <td class="py-2.5 pr-4 text-zinc-300">Edge cases</td>
+              <td class="py-2.5 px-3">Only imagined</td>
+              <td class="py-2.5 px-3">Only captured</td>
+              <td class="py-2.5 px-3">Uncontrolled</td>
+              <td class="py-2.5 px-3">Curated</td>
+              <td class="py-2.5 px-3 text-emerald-300">Real + injectable</td>
+            </tr>
+            <tr class="border-b border-zinc-900">
+              <td class="py-2.5 pr-4 text-zinc-300">Stays current</td>
+              <td class="py-2.5 px-3">No</td>
+              <td class="py-2.5 px-3">No</td>
+              <td class="py-2.5 px-3">Yes</td>
+              <td class="py-2.5 px-3">6-12mo behind</td>
+              <td class="py-2.5 px-3 text-emerald-300">Always</td>
+            </tr>
+            <tr class="border-b border-zinc-900">
+              <td class="py-2.5 pr-4 text-zinc-300">Cost per use</td>
+              <td class="py-2.5 px-3">Free</td>
+              <td class="py-2.5 px-3">Free</td>
+              <td class="py-2.5 px-3">$$$ + rate limits</td>
+              <td class="py-2.5 px-3">Course fee</td>
+              <td class="py-2.5 px-3 text-emerald-300">Free</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 pr-4 text-zinc-300">Failure testing</td>
+              <td class="py-2.5 px-3">Manual</td>
+              <td class="py-2.5 px-3">If recorded</td>
+              <td class="py-2.5 px-3">Can't control</td>
+              <td class="py-2.5 px-3">Scripted</td>
+              <td class="py-2.5 px-3 text-emerald-300">Built-in scenarios</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="how" class="max-w-5xl mx-auto px-6 py-16">
       <h2 class="text-2xl font-semibold text-white text-center">How it works</h2>
       <div class="mt-12 grid gap-10 md:grid-cols-3">
